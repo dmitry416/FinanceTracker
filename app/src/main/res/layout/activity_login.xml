@@ -4,9 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:background="?attr/colorSurface">
 
-    <!-- App Logo/Icon at the top -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -14,31 +13,26 @@
         android:padding="24dp"
         android:gravity="center">
 
-        <!-- Logo Section -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="120dp"
             android:layout_height="120dp"
             app:cardCornerRadius="60dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/primary_color"
+            app:cardBackgroundColor="?attr/colorPrimary"
             android:layout_marginBottom="32dp">
 
             <ImageView
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_gravity="center"
-                android:src="@drawable/cashtrackerlogo"
-                />
+                android:src="@drawable/financetracker_logo" />
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Login Form Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/white"
-            android:layout_marginBottom="24dp">
+            style="?attr/materialCardViewStyle"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -50,83 +44,77 @@
                     android:id="@+id/tvLoginTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome Back"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_color"
+                    android:text="С возвращением!"
+                    android:textAppearance="?attr/textAppearanceHeadline5"
+                    android:textColor="?attr/colorOnSurface"
                     android:layout_marginBottom="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sign in to continue"
-                    android:textSize="14sp"
-                    android:textColor="@color/text_color"
-                    android:alpha="0.7"
+                    android:text="Войдите, чтобы продолжить"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    android:textColor="?android:attr/textColorSecondary"
                     android:layout_marginBottom="24dp"/>
 
-                <!-- Email Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:boxStrokeColor="@color/primary_color"
-                    app:hintTextColor="@color/primary_color"
                     app:startIconDrawable="@drawable/ic_email"
-                    app:startIconTint="@color/primary_color"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Email"
-                        android:inputType="textEmailAddress"
-                        android:textColor="@color/text_color"/>
+                        android:hint="Эл. почта"
+                        android:inputType="textEmailAddress"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Password Input -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    app:boxStrokeColor="@color/primary_color"
-                    app:hintTextColor="@color/primary_color"
                     app:startIconDrawable="@drawable/ic_lock"
-                    app:startIconTint="@color/primary_color"
                     app:endIconMode="password_toggle"
-                    app:endIconTint="@color/primary_color"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Password"
-                        android:inputType="textPassword"
-                        android:textColor="@color/text_color"/>
+                        android:hint="Пароль"
+                        android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Login Button -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Login"
-                    android:textAllCaps="false"
-                    app:cornerRadius="12dp"
-                    android:backgroundTint="@color/primary_color"/>
+                    android:text="Войти"
+                    app:cornerRadius="12dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Sign Up Link -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSignupLink"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Don't have an account? Sign up"
-            android:textAllCaps="false"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:textColor="@color/primary_color"/>
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnContinueAsGuest"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="Продолжить как гость"
+                app:cornerRadius="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSignupLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Нет аккаунта? Зарегистрироваться"
+                style="@style/Widget.MaterialComponents.Button.TextButton"/>
+        </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

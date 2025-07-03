@@ -1,191 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color">
+    android:background="?attr/colorSurface"
+    tools:context=".MainActivity">
 
-    <ScrollView
-        android:id="@+id/main_content"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:name="com.example.finance_tracker.HomeFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/bottom_navigation"
-        android:clipToPadding="false"
-        android:padding="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Welcome Section -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/primary_color">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-                    <TextView
-                        android:id="@+id/tvWelcome"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Welcome to CashTracker"
-                        android:textSize="24sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white"/>
-
-                    <!-- Circular Budget Card -->
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
-
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="130dp"
-                            android:layout_height="130dp"
-                            android:layout_gravity="center"
-                            app:cardCornerRadius="80dp"
-                            app:cardElevation="8dp"
-                            app:cardBackgroundColor="@color/accent_color">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:padding="16dp">
-
-
-
-                                <TextView
-                                    android:id="@+id/tvBudget"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="No budget set"
-                                    android:textSize="20sp"
-                                    android:textStyle="bold"
-                                    android:textColor="@color/text_color"
-                                    android:layout_marginTop="8dp"
-                                    android:gravity="center"/>
-
-
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                    </FrameLayout>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnUpdateBudget"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Update Budget"
-                android:textAllCaps="false"
-                app:cornerRadius="12dp"
-                android:backgroundTint="@color/accent_color"
-                android:textColor="@color/text_color"
-                app:icon="@drawable/ic_budget"
-                app:iconTint="@color/text_color"
-                android:layout_marginBottom="12dp"/>
-
-            <!-- Income Chart Section -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Income Breakdown"
-                        android:textSize="18sp"
-                        android:textColor="@color/text_color"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
-
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pieChartIncome"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Expense Chart Section -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Expense Breakdown"
-                        android:textSize="18sp"
-                        android:textColor="@color/text_color"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp"/>
-
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pieChartExpense"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Action Buttons -->
-
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnAddTransaction"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:text="Add Transaction"
-                android:textAllCaps="false"
-                app:cornerRadius="12dp"
-                android:backgroundTint="@color/primary_color"
-                app:icon="@drawable/ic_add_transaction"
-                android:layout_marginBottom="12dp"/>
-
-
-        </LinearLayout>
-    </ScrollView>
+        android:layout_above="@id/bottom_navigation" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/white"
+        android:background="?attr/colorSurface"
         app:elevation="8dp"
-        app:itemIconTint="@color/primary_color"
-        app:itemTextColor="@color/primary_color"
-        app:menu="@menu/bottom_nav_menu"
-        app:labelVisibilityMode="labeled"/>
+        app:itemIconTint="@color/bottom_nav_item_color_selector"
+        app:itemTextColor="@color/bottom_nav_item_color_selector"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_nav_menu" />
+
 </RelativeLayout>

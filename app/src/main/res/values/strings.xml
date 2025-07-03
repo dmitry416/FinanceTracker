@@ -1,5 +1,3 @@
 <resources>
-    <string name="app_name">CashTracker</string>
-    <string name="username">Dulani</string>
-
+    <string name="app_name">FinanceTracker</string>
 </resources>

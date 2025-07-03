@@ -40,12 +40,13 @@ class NotificationWorker(
     }
 
     private fun showNotification() {
-        val intent = Intent(context, AddTransactionActivity::class.java)
+        val intent = Intent(context, MainActivity::class.java).apply {
+        }
         val pendingIntent = PendingIntent.getActivity(
             context,
             0,
             intent,
-            PendingIntent.FLAG_IMMUTABLE
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
         val notification = NotificationCompat.Builder(context, CHANNEL_ID)

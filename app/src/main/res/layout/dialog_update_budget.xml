@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="16dp"
-    app:cardBackgroundColor="@color/white">
+    style="?attr/materialCardViewStyle"
+    app:cardCornerRadius="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +13,6 @@
         android:orientation="vertical"
         android:padding="24dp">
 
-        <!-- Header Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,28 +26,23 @@
                 android:src="@drawable/ic_budget"
                 android:background="@drawable/circle_background"
                 android:padding="8dp"
-                app:tint="@color/text_color"
+                app:tint="?attr/colorPrimary"
                 android:layout_marginEnd="16dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Update Budget"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="@color/text_color"/>
+                android:text="Обновить бюджет"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="?attr/colorOnSurface"/>
         </LinearLayout>
 
-        <!-- Amount Input -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:boxStrokeColor="@color/primary_color"
-            app:hintTextColor="@color/primary_color"
-            android:hint="Enter Budget Amount"
+            android:hint="Введите сумму бюджета"
             app:startIconDrawable="@drawable/ic_budget"
-            app:startIconTint="@color/primary_color"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -56,11 +50,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="numberDecimal"
-                android:textColor="@color/text_color"
                 android:textSize="16sp"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Action Buttons -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -71,20 +63,16 @@
                 android:id="@+id/btnCancel"
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
-                android:text="Cancel"
-                android:textAllCaps="false"
+                android:text="Отмена"
                 style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:textColor="@color/text_color"
                 android:layout_marginEnd="8dp"/>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSubmitBudget"
                 android:layout_width="wrap_content"
                 android:layout_height="56dp"
-                android:text="Update"
-                android:textAllCaps="false"
+                android:text="Обновить"
                 app:cornerRadius="12dp"
-                android:backgroundTint="@color/primary_color"
                 android:paddingHorizontal="24dp"/>
         </LinearLayout>
     </LinearLayout>

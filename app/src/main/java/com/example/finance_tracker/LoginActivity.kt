@@ -9,10 +9,22 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var db: AppDatabase
     private lateinit var sessionManager: SessionManager
+
+    private lateinit var etEmail: EditText
+    private lateinit var etPassword: EditText
+    private lateinit var btnLogin: Button
+    private lateinit var btnSignupLink: Button
+    private lateinit var btnContinueAsGuest: Button
+
+    companion object {
+        const val GUEST_EMAIL = "guest@local.user"
+        const val GUEST_USERNAME = "Guest"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,61 +33,78 @@ class LoginActivity : AppCompatActivity() {
         db = AppDatabase.getDatabase(this)
         sessionManager = SessionManager(this)
 
-        val etEmail: EditText = findViewById(R.id.etEmail)
-        val etPassword: EditText = findViewById(R.id.etPassword)
-        val btnLogin: Button = findViewById(R.id.btnLogin)
-        val btnSignupLink: Button = findViewById(R.id.btnSignupLink)
+        if (sessionManager.getUserId() != -1) {
+            navigateToMain()
+            return
+        }
+
+        etEmail = findViewById(R.id.etEmail)
+        etPassword = findViewById(R.id.etPassword)
+        btnLogin = findViewById(R.id.btnLogin)
+        btnSignupLink = findViewById(R.id.btnSignupLink)
+        btnContinueAsGuest = findViewById(R.id.btnContinueAsGuest)
 
         btnLogin.setOnClickListener {
-            val email = etEmail.text.toString().trim()
-            val password = etPassword.text.toString().trim()
-
-            // Validate inputs
-            if (email.isEmpty()) {
-                etEmail.error = "Please enter your email"
-                return@setOnClickListener
-            }
-            if (!isValidEmail(email)) {
-                etEmail.error = "Invalid email format"
-                return@setOnClickListener
-            }
-            if (password.isEmpty()) {
-                etPassword.error = "Please enter your password"
-                return@setOnClickListener
-            }
-            if (password.length < 6) {
-                etPassword.error = "Password must be at least 6 characters"
-                return@setOnClickListener
-            }
-
-            // Perform login
-            CoroutineScope(Dispatchers.IO).launch {
-                val user = db.userDao().getUser(email, password)
-                if (user != null) {
-                    sessionManager.saveUserId(user.id)
-                    runOnUiThread {
-                        Toast.makeText(this@LoginActivity, "Login Successful!", Toast.LENGTH_SHORT)
-                            .show()
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                } else {
-                    runOnUiThread {
-                        Toast.makeText(this@LoginActivity, "Invalid Credentials", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            }
+            handleLogin(etEmail.text.toString().trim(), etPassword.text.toString().trim())
         }
 
         btnSignupLink.setOnClickListener {
-            val intent = Intent(this, SignupActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
+        btnContinueAsGuest.setOnClickListener {
+            handleGuestLogin()
         }
     }
 
-    // Helper function to validate email pattern
+    private fun handleGuestLogin() {
+        CoroutineScope(Dispatchers.IO).launch {
+            var guestUser = db.userDao().getUserByEmail(GUEST_EMAIL)
+            if (guestUser == null) {
+                val newGuest = User(username = GUEST_USERNAME, email = GUEST_EMAIL, password = "")
+                db.userDao().insert(newGuest)
+                guestUser = db.userDao().getUserByEmail(GUEST_EMAIL)
+            }
+
+            guestUser?.let {
+                sessionManager.saveUserId(it.id)
+                withContext(Dispatchers.Main) {
+                    navigateToMain()
+                }
+            }
+        }
+    }
+
+    private fun handleLogin(email: String, password: String) {
+        if (email.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Пожалуйста, заполните все поля", Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (!isValidEmail(email)) {
+            etEmail.error = "Неверный формат почты"
+            return
+        }
+
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = db.userDao().getUser(email, password)
+            withContext(Dispatchers.Main) {
+                if (user != null) {
+                    sessionManager.saveUserId(user.id)
+                    Toast.makeText(this@LoginActivity, "Вход выполнен успешно!", Toast.LENGTH_SHORT).show()
+                    navigateToMain()
+                } else {
+                    Toast.makeText(this@LoginActivity, "Неверные учетные данные", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun navigateToMain() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
     private fun isValidEmail(email: String): Boolean {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }

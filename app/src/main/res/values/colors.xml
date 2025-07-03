@@ -1,10 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="primary_light">#006978</color>
+    <color name="on_primary_light">#FFFFFF</color>
+    <color name="primary_container_light">#9AF1FF</color>
+    <color name="on_primary_container_light">#001F25</color>
+    <color name="secondary_light">#FFB827</color>
+    <color name="on_secondary_light">#000000</color>
+    <color name="secondary_container_light">#FFDDB3</color>
+    <color name="on_secondary_container_light">#281800</color>
+    <color name="surface_light">#F8FDFF</color>
+    <color name="on_surface_light">#191C1D</color>
+    <color name="surface_variant_light">#E0E3E3</color>
+    <color name="on_surface_variant_light">#404849</color>
+    <color name="outline_light">#70797A</color>
+    <color name="income_color_light">#2E7D32</color>
+    <color name="expense_color_light">#C62828</color>
 
-        <color name="background_color">#F4F6FF</color>
-        <color name="primary_color">#441350</color>
-        <color name="accent_color">#FBD46D</color>
-        <color name="text_color">#07031A</color>
+    <color name="primary_dark">#4FD8EC</color>
+    <color name="on_primary_dark">#00363F</color>
+    <color name="primary_container_dark">#004F5A</color>
+    <color name="on_primary_container_dark">#9AF1FF</color>
+    <color name="secondary_dark">#FFB827</color>
+    <color name="on_secondary_dark">#3F2B00</color>
+    <color name="secondary_container_dark">#5B4000</color>
+    <color name="on_secondary_container_dark">#FFDDB3</color>
+    <color name="surface_dark">#191C1D</color>
+    <color name="on_surface_dark">#E1E3E4</color>
+    <color name="surface_variant_dark">#404849</color>
+    <color name="on_surface_variant_dark">#C0C8C9</color>
+    <color name="outline_dark">#8A9293</color>
+    <color name="income_color_dark">#66BB6A</color>
+    <color name="expense_color_dark">#EF5350</color>
 </resources>

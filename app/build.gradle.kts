@@ -53,6 +53,8 @@ dependencies {
     
     // WorkManager for scheduling notifications
     implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    implementation("com.github.dhaval2404:colorpicker:2.3")
     
     // Core Android dependencies
     implementation(libs.androidx.core.ktx)
