@@ -30,9 +30,19 @@ class CategoriesActivity : AppCompatActivity() {
     private lateinit var categoryAdapter: CategoryAdapter
 
     private val iconList = listOf(
-        "ic_category_food", "ic_category_transport", "ic_category_shopping",
-        "ic_category_health", "ic_category_salary", "ic_home", "ic_wallet",
-        "ic_person", "ic_category_other"
+        "ic_category_food",
+        "ic_category_transport",
+        "ic_category_shopping",
+        "ic_category_health",
+        "ic_category_salary",
+        "ic_category_other",
+        "ic_category_accessibility",
+        "ic_category_bitcoin",
+        "ic_category_exercise",
+        "ic_category_flight",
+        "ic_category_portal",
+        "ic_category_star",
+        "ic_category_stories"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

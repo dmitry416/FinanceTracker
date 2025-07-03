@@ -30,6 +30,15 @@ interface TransactionDao {
 
     @Delete
     suspend fun deleteTransaction(transaction: Transaction)
+
+    @Query("DELETE FROM transactions WHERE userId = :userId")
+    suspend fun clearUserData(userId: Int)
+
+    @Query("DELETE FROM transactions WHERE userId = :userId")
+    suspend fun clearAndInsert(userId: Int, transactions: List<Transaction>) {
+        clearUserData(userId)
+        insertTransactions(transactions)
+    }
 }
 
 data class CategoryTotal(

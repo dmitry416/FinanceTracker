@@ -1,6 +1,7 @@
 package com.example.finance_tracker
 
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -78,7 +79,12 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun setupPieChart(pieChart: PieChart, data: List<CategoryTotal>, label: String, colorMap: Map<String, String>) {
+    private fun setupPieChart(
+        pieChart: PieChart,
+        data: List<CategoryTotal>,
+        label: String,
+        colorMap: Map<String, String>
+    ) {
         if (data.isEmpty()) {
             pieChart.visibility = View.GONE
             return
@@ -133,6 +139,8 @@ class HomeFragment : Fragment() {
             .setCancelable(true)
             .create()
 
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         dialogView.findViewById<Button>(R.id.btnCancel).setOnClickListener {
             dialog.dismiss()
         }
@@ -143,13 +151,18 @@ class HomeFragment : Fragment() {
                 CoroutineScope(Dispatchers.IO).launch {
                     db.budgetDao().insertBudget(Budget(amount = budgetAmount, userId = userId))
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(requireContext(), "Budget updated successfully", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), "Бюджет обновлен", Toast.LENGTH_SHORT)
+                            .show()
                         loadBudget(userId)
                         dialog.dismiss()
                     }
                 }
             } else {
-                Toast.makeText(requireContext(), "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Пожалуйста, введите корректную сумму",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
         dialog.show()
